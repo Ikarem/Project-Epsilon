@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Management Dashboard - Epsilon</title>
+    <link rel="icon" type="image/png" href="/assets/logo.png">
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+
+<body>
+
+    <header>
+        <div class="left-header-group">
+            <div class="logo">
+                <img src="/assets/logo.png" alt="Epsilon Logo" class="site-logo">
+                <span>Epsilon Dashboard</span>
+            </div>
+            <div id="theme-toggle" class="theme-toggle">
+                <svg class="sun-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor"
+                    stroke-width="2">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                </svg>
+                <svg class="moon-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor"
+                    stroke-width="2">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 A7 7 0 0 0 21 12.79z"></path>
+                </svg>
+            </div>
+        </div>
+        <div class="header-right">
+            <a href="../index.html" class="home-link">Home</a>
+            <a href="#dashboard" onclick="goBackToDashboard()" class="home-link">Projects</a>
+            <a href="#timeline" onclick="showTimelineView()" class="home-link">Timeline</a>
+            <a href="#statistics" onclick="showStatisticsView()" class="home-link">Statistics</a>
+            <div class="admin-welcome">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+                <div class="role-dropdown" id="roleDropdown" onclick="toggleRoleDropdown(event)">
+                    <span id="userRoleDisplay">Welcome, Leader</span>
+
+                    <div class="role-dropdown-content" id="roleDropdownContent">
+                        <a href="#" onclick="changeUserRole('leader'); return false;">Leader</a>
+                        <a href="#" onclick="changeUserRole('manager'); return false;">Manager</a>
+                        <a href="#" onclick="changeUserRole('member'); return false;">Member</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+
+    <div class="dashboard-container" id="dashboardView">
+        <div class="dashboard-header">
+            <h2>Manage Your Projects</h2>
+            <button class="action-button leader-only" onclick="showAddProjectForm()">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+                Add Project
+            </button>
+        </div>
+        <ul class="project-list" id="projectList"></ul>
+    </div>
+
+    <div class="form-container" id="projectForm">
+        <h2 id="formTitle">Add Project</h2>
+        <input type="text" id="projectNameInput" placeholder="Project name" required />
+        <textarea id="projectDescriptionInput" placeholder="Project description" rows="4"></textarea>
+        <div class="color-picker-wrapper">
+            <label class="color-picker-label">Project Color</label>
+            <input type="color" id="projectColorInput" value="#4361ee" />
+        </div>
+        <div class="form-buttons">
+            <button id="submitProjectButton" onclick="submitProject()">Submit</button>
+            <button onclick="cancelForm()">Cancel</button>
+        </div>
+    </div>
+
+    <div class="project-details" id="projectDetailsView">
+        <div class="details-header">
+            <h2 id="projectTitle">Project Details</h2>
+            <button class="back-button" onclick="goBackToDashboard()">Back to Dashboard</button>
+        </div>
+
+
+        <div class="details-body">
+            <div class="project-info">
+                <p><strong>Description:</strong> <span id="projectDescription">No description available</span></p>
+                <div class="progress-container">
+                    <p><strong>Overall Progress:</strong> <span id="completionPercentage">0%</span></p>
+                    <div class="progress-bar">
+                        <div id="progressFill" class="progress-fill"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="columns-container">
+                <div class="left-column">
+                    <div class="task-section">
+                        <div class="task-header">
+                            <h3 class="header-fix">Tasks</h3>
+
+                            <div class="task-controls">
+                                <div class="search-container">
+                                    <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="2">
+                                        <circle cx="11" cy="11" r="8"></circle>
+                                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                    </svg>
+                                    <input type="text" id="taskSearch" placeholder="Search tasks..."
+                                        onkeyup="searchTasks()">
+                                </div>
+
+
+                                <button id="viewToggleButton" class="view-toggle-btn" onclick="toggleTaskView()"
+                                    title="Toggle View">
+                                    <svg class="list-view-icon" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="2">
+                                        <line x1="8" y1="6" x2="21" y2="6"></line>
+                                        <line x1="8" y1="12" x2="21" y2="12"></line>
+                                        <line x1="8" y1="18" x2="21" y2="18"></line>
+                                        <line x1="3" y1="6" x2="3.01" y2="6"></line>
+                                        <line x1="3" y1="12" x2="3.01" y2="12"></line>
+                                        <line x1="3" y1="18" x2="3.01" y2="18"></line>
+                                    </svg>
+                                    <span>List View</span>
+                                </button>
+
+                                <button class="add-task-btn manager-only" onclick="showAddTaskForm()">Add Task</button>
+                            </div>
+                        </div>
+                        <div class="task-list" id="taskList"></div>
+                    </div>
+                </div>
+
+                <div class="right-column">
+                    <div class="chart-section">
+                        <h3>Project Analytics</h3>
+                        <div class="chart-container">
+                            <canvas id="projectChart"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="chart-section">
+                        <h3>Task Priority Distribution</h3>
+                        <div class="chart-container">
+                            <canvas id="priorityChart"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="project-timeline">
+                        <h3>Timeline</h3>
+                        <div class="timeline-container" id="projectTimeline">
+
+                        </div>
+                    </div>
+
+                    <div class="risk-assessment">
+                        <div class="risk-header">
+                            <h3>Risk Assessment</h3>
+                            <button class="add-risk-btn member-only" onclick="showAddRiskForm()">Add Risk</button>
+                        </div>
+                        <div class="risk-list" id="riskList">
+
+                        </div>
+                    </div>
+
+                    <div class="workload-section">
+                        <h3>Team Workload</h3>
+                        <div class="workload-container" id="teamWorkload">
+
+                        </div>
+                    </div>
+
+                    <div class="milestone-section">
+                        <div class="milestone-header">
+                            <h3>Milestones</h3>
+                            <button class="add-milestone-btn manager-only" onclick="showAddMilestoneForm()">Add
+                                Milestone</button>
+                        </div>
+                        <div class="milestone-container" id="projectMilestones">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="timeline-view" id="timelineView">
+        <div class="details-header">
+            <h2>Project Timeline Overview</h2>
+            <button class="back-button" onclick="goBackToDashboard()">Back to Dashboard</button>
+        </div>
+
+        <div class="timeline-filters">
+            <select id="projectFilter" onchange="filterTimeline()">
+                <option value="all">All Projects</option>
+
+            </select>
+
+            <div class="date-range">
+                <input type="date" id="timelineStartDate">
+                <span>to</span>
+                <input type="date" id="timelineEndDate">
+                <button onclick="filterTimelineByDate()">Apply</button>
+            </div>
+        </div>
+
+        <div class="master-timeline-container" id="masterTimeline">
+
+        </div>
+    </div>
+
+    <div class="statistics-view" id="statisticsView">
+        <div class="details-header">
+            <h2>Project Statistics & Analytics</h2>
+            <button class="back-button" onclick="goBackToDashboard()">Back to Dashboard</button>
+        </div>
+
+        <div class="statistics-container">
+            <div class="stat-section">
+                <h3>Project Completion Rate</h3>
+                <div class="chart-container">
+                    <canvas id="completionRateChart"></canvas>
+                </div>
+            </div>
+
+            <div class="stat-section">
+                <h3>Task Velocity</h3>
+                <div class="chart-container">
+                    <canvas id="taskVelocityChart"></canvas>
+                </div>
+            </div>
+
+            <div class="stat-section">
+                <h3>Completion Time Distribution</h3>
+                <div class="chart-container">
+
+                    <canvas id="completionTimeChart"></canvas>
+                </div>
+            </div>
+
+            <div class="stat-section">
+                <h3>Project Health Overview</h3>
+
+                <div class="project-health-grid" id="projectHealthGrid">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="task-form" id="taskForm">
+        <h3 class="task-header-alignment">Add Task</h3>
+        <input type="text" id="taskNameInput" placeholder="Task name" required />
+        <textarea id="taskDescriptionInput" placeholder="Task description"></textarea>
+        <select id="taskPriorityInput" required>
+            <option value="low">Low Priority</option>
+            <option value="medium">Medium Priority</option>
+            <option value="high">High Priority</option>
+        </select>
+        <input type="date" id="taskDueDateInput" required />
+        <input type="text" id="taskAssigneeInput" placeholder="Assign to (email or username)" />
+
+        <div class="form-group">
+            <label for="taskTagsSelect">Tags</label>
+            <div class="tags-container">
+                <select id="taskTagsSelect" multiple>
+                </select>
+                <button type="button" class="small-btn" onclick="showAddTagForm()">+</button>
+            </div>
+        </div>
+
+        <div class="form-buttons">
+            <button onclick="submitTask(currentProjectId)">Add Task</button>
+            <button onclick="closeTaskForm()">Cancel</button>
+        </div>
+    </div>
+
+
+    <div class="risk-form" id="riskForm">
+        <h3>Add Risk</h3>
+        <textarea id="riskDescriptionInput" placeholder="Risk description" required></textarea>
+
+        <div class="form-group">
+            <label for="riskImpactInput">Impact</label>
+            <select id="riskImpactInput">
+                <option value="Low">Low</option>
+                <option value="Medium">Medium</option>
+                <option value="High">High</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="riskProbabilityInput">Probability</label>
+            <select id="riskProbabilityInput">
+                <option value="Low">Low</option>
+                <option value="Medium">Medium</option>
+                <option value="High">High</option>
+            </select>
+        </div>
+
+        <textarea id="riskMitigationInput" placeholder="Mitigation strategy"></textarea>
+
+        <div class="form-buttons">
+            <button type="button" onclick="submitRisk(currentProjectId)">Add Risk</button>
+            <button type="button" onclick="closeRiskForm()">Cancel</button>
+        </div>
+    </div>
+
+
+    <div class="milestone-form" id="milestoneForm">
+        <h3>Add Milestone</h3>
+        <input type="text" id="milestoneNameInput" placeholder="Milestone name" required />
+        <textarea id="milestoneDescriptionInput" placeholder="Milestone description"></textarea>
+        <input type="date" id="milestoneDueDateInput" required />
+
+        <div class="form-buttons">
+            <button type="button" onclick="submitMilestone(currentProjectId)">Add Milestone</button>
+            <button type="button" onclick="closeMilestoneForm()">Cancel</button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="/js/api.js"></script>
+    <script src="/js/charts.js"></script>
+    <script src="/js/scripts.js"></script>
+    <script src="/js/init.js"></script>
+
+</body>
+
+</html>

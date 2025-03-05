@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/png" href="/assets/logo.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>&copy; Project Epsilon 2025</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            color: #333;
+        }
+
+        header {
+            background-color: #ffffff;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #4a00e0;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .site-logo {
+            width: 40px;
+            height: 40px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-size: 16px;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #4a00e0;
+        }
+
+        .login-button {
+            background-color: #4a00e0;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .login-button:hover {
+            background-color: #3a00b5;
+            transform: scale(1.05);
+        }
+
+        .dashboard-button {
+            background: linear-gradient(135deg, #4a00e0, #3a00b5);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .dashboard-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(74, 0, 224, 0.3);
+        }
+
+        .dashboard-button svg {
+            transition: transform 0.3s ease;
+        }
+
+        .dashboard-button:hover svg {
+            transform: rotate(90deg);
+        }
+
+        .hero-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 60px 20px;
+            background-color: #ffffff;
+            margin-bottom: 40px;
+            gap: 60px;
+        }
+
+        .hero-text {
+            max-width: 45%;
+            animation: fadeInRight 1s ease-in-out;
+            margin-left: 200px;
+        }
+
+        .hero-text h1 {
+            font-size: 48px;
+            color: #4a00e0;
+            margin-bottom: 20px;
+        }
+
+        .hero-text p {
+            font-size: 18px;
+            color: #555;
+            margin-bottom: 30px;
+        }
+
+        .hero-graph {
+            max-width: 45%;
+            animation: fadeInLeft 1s ease-in-out;
+            margin-right: 200px;
+        }
+
+        .hero-graph img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .features-section {
+            padding: 40px;
+            text-align: center;
+            background-color: #ffffff;
+            margin-bottom: 40px;
+        }
+
+        .features-section h2 {
+            font-size: 36px;
+            color: #4a00e0;
+            margin-bottom: 20px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .feature-card {
+            background-color: #f9f9ff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .feature-card h3 {
+            font-size: 20px;
+            color: #4a00e0;
+            margin-bottom: 10px;
+        }
+
+        .feature-card p {
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 10px;
+        }
+
+        .feature-card img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        footer {
+            background-color: #4a00e0;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+
+        .features-section h2 {
+            font-size: 36px;
+            color: #4a00e0;
+            margin-bottom: 20px;
+            animation: fadeInUp 0.8s ease-in-out;
+        }
+
+        .feature-card {
+            background-color: #f9f9ff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            animation: popUp 0.8s ease-in-out;
+            opacity: 0;
+            animation-fill-mode: forwards;
+        }
+
+        .feature-card:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+
+        .feature-card:nth-child(2) {
+            animation-delay: 0.3s;
+        }
+
+        .feature-card:nth-child(3) {
+            animation-delay: 0.5s;
+        }
+
+        .feature-card:nth-child(4) {
+            animation-delay: 0.7s;
+        }
+
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes popUp {
+            0% {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+
+            70% {
+                transform: scale(1.05);
+                opacity: 1;
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="logo" onclick="location.href='index.html'">
+            <img src="assets/logo.png" alt="Epsilon Logo" class="site-logo">
+            <span>Project Epsilon</span>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="features.html">Features</a>
+            <a href="pricing.html">Pricing</a>
+            <a href="contact.html">Contact</a>
+            <button class="dashboard-button" onclick="location.href='dashboard.html'">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                </svg>
+                Dashboard
+            </button>
+        </div>
+    </header>
+
+    <section class="hero-section">
+        <div class="hero-text">
+            <h1>Effortlessly Manage Your Projects</h1>
+            <p>Streamline your workflow with Epsilon. Collaborate with your team, track progress, and achieve your goals
+                faster than ever.</p>
+            <button class="login-button" onclick="location.href='dashboard.html'">Get Started</button>
+        </div>
+        <div class="hero-graph">
+            <img src="assets/data_illustration1.svg" alt="Graph Illustration">
+        </div>
+    </section>
+
+    <section class="features-section" id="features">
+        <h2>Key Features</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <h3>Task Management</h3>
+                <p>Create, assign, and track tasks with ease.</p>
+                <img src="assets/task_management.png" alt="Task Management Illustration">
+            </div>
+            <div class="feature-card">
+                <h3>Team Collaboration</h3>
+                <p>Work seamlessly with your team in real-time.</p>
+                <img src="assets/team_collaboration.png" alt="Team Collaboration Illustration">
+            </div>
+            <div class="feature-card">
+                <h3>Progress Tracking</h3>
+                <p>Visualize project progress with charts and graphs.</p>
+                <img src="assets/progress_tracking.png" alt="Progress Tracking Illustration">
+            </div>
+            <div class="feature-card">
+                <h3>Role-Based Access</h3>
+                <p>Manage permissions for Admins, Managers, and Team Members.</p>
+                <img src="assets/role_access.png" alt="Role-Based Access Illustration">
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        &copy; 2025 Epsilon. All rights reserved.
+    </footer>
+    <script src="/js/init.js"></script>
+</body>
+
+</html>

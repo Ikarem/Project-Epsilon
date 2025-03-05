@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/png" href="/assets/logo.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>&copy; Project Epsilon 2025</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            color: #333;
+        }
+
+
+        header {
+            background-color: #ffffff;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            min-height: 70px;
+            max-height: 80px;
+            overflow: hidden;
+        }
+
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #4a00e0;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .site-logo {
+            width: 40px;
+            height: 40px;
+        }
+
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-size: 16px;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #4a00e0;
+        }
+
+
+        .dashboard-button {
+            background: linear-gradient(135deg, #4a00e0, #3a00b5);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .dashboard-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(74, 0, 224, 0.3);
+        }
+
+        .dashboard-button svg {
+            transition: transform 0.3s ease;
+        }
+
+        .dashboard-button:hover svg {
+            transform: rotate(90deg);
+        }
+
+
+        .login-button {
+            display: none;
+        }
+
+
+        .pricing-section {
+            padding: 40px;
+            text-align: center;
+            background-color: #ffffff;
+            margin-bottom: 40px;
+        }
+
+        .pricing-section h2 {
+            font-size: 36px;
+            color: #4a00e0;
+            margin-bottom: 20px;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .pricing-card {
+            background-color: #f9f9ff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .pricing-card h3 {
+            font-size: 24px;
+            color: #4a00e0;
+            margin-bottom: 10px;
+        }
+
+        .pricing-card p.price {
+            font-size: 32px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .pricing-card ul {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 20px;
+        }
+
+        .pricing-card ul li {
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 10px;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .pricing-card ul li:before {
+            content: "✓";
+            color: #4a00e0;
+            position: absolute;
+            left: 0;
+        }
+
+        .pricing-card button {
+            background-color: #4a00e0;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            width: 80%;
+            margin-top: 10px;
+        }
+
+        .pricing-card button:hover {
+            background-color: #3a00b5;
+            transform: scale(1.05);
+        }
+
+
+        footer {
+            background-color: #4a00e0;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="logo" onclick="location.href='index.html'">
+            <img src="assets/logo.png" alt="Epsilon Logo" class="site-logo">
+            <span>Project Epsilon</span>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="features.html">Features</a>
+            <a href="pricing.html">Pricing</a>
+            <a href="contact.html">Contact</a>
+            <button class="dashboard-button" onclick="location.href='dashboard.html'">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                </svg>
+                Dashboard
+            </button>
+        </div>
+    </header>
+
+
+    <section class="pricing-section" id="pricing">
+        <h2>Choose Your Plan</h2>
+        <div class="pricing-grid">
+
+            <div class="pricing-card">
+                <h3>Basic</h3>
+                <p class="price">$0/month</p>
+                <ul>
+                    <li>Up to 5 projects</li>
+                    <li>10 team members</li>
+                    <li>Limited task tracking</li>
+                    <li>Email support</li>
+                </ul>
+                <button onclick="location.href='signup.html'">Get Started</button>
+            </div>
+
+
+            <div class="pricing-card">
+                <h3>Pro</h3>
+                <p class="price">$10/month</p>
+                <ul>
+                    <li>Unlimited projects</li>
+                    <li>50 team members</li>
+                    <li>Advanced task tracking</li>
+                    <li>Priority email support</li>
+                </ul>
+                <button onclick="location.href='signup.html'">Get Started</button>
+            </div>
+
+
+            <div class="pricing-card">
+                <h3>Enterprise</h3>
+                <p class="price">Custom</p>
+                <ul>
+                    <li>Unlimited everything</li>
+                    <li>Dedicated account manager</li>
+                    <li>Custom integrations</li>
+                    <li>24/7 priority support</li>
+                </ul>
+                <button onclick="location.href='contact.html'">Contact Us</button>
+            </div>
+        </div>
+    </section>
+
+
+    <footer>
+        &copy; 2025 Epsilon. All rights reserved.
+    </footer>
+    <script src="/js/init.js"></script>
+</body>
+
+</html>

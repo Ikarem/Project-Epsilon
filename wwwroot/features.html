@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/png" href="/assets/logo.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>&copy; Project Epsilon 2025</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            color: #333;
+        }
+
+
+        header {
+            background-color: #ffffff;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            min-height: 70px;
+            max-height: 80px;
+            overflow: hidden;
+        }
+
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #4a00e0;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .site-logo {
+            width: 40px;
+            height: 40px;
+        }
+
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-size: 16px;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #4a00e0;
+        }
+
+
+        .dashboard-button {
+            background: linear-gradient(135deg, #4a00e0, #3a00b5);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .dashboard-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(74, 0, 224, 0.3);
+        }
+
+        .dashboard-button svg {
+            transition: transform 0.3s ease;
+        }
+
+        .dashboard-button:hover svg {
+            transform: rotate(90deg);
+        }
+
+
+        .features-section {
+            padding: 40px;
+            text-align: center;
+            background-color: #ffffff;
+            margin-bottom: 40px;
+        }
+
+        .features-section h2 {
+            font-size: 36px;
+            color: #4a00e0;
+            margin-bottom: 20px;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 40px;
+            padding: 20px;
+            background-color: #f9f9ff;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-item:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .feature-item img {
+            width: 40%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .feature-content {
+            width: 60%;
+            padding: 0 20px;
+            text-align: left;
+        }
+
+        .feature-content h3 {
+            font-size: 24px;
+            color: #4a00e0;
+            margin-bottom: 10px;
+        }
+
+        .feature-content p {
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+
+        footer {
+            background-color: #4a00e0;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="logo" onclick="location.href='index.html'">
+            <img src="assets/logo.png" alt="Epsilon Logo" class="site-logo">
+            <span>Project Epsilon</span>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="features.html">Features</a>
+            <a href="pricing.html">Pricing</a>
+            <a href="contact.html">Contact</a>
+            <button class="dashboard-button" onclick="location.href='dashboard.html'">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                </svg>
+                Dashboard
+            </button>
+        </div>
+    </header>
+
+    <section class="features-section" id="features">
+        <h2>Explore Our Features</h2>
+
+
+        <div class="feature-item">
+            <img src="assets/task_management.png" alt="Task Management Illustration">
+            <div class="feature-content">
+                <h3>Task Management</h3>
+                <p>Create, assign, and track tasks with ease. Organize your projects efficiently and ensure nothing
+                    falls through the cracks.</p>
+            </div>
+        </div>
+
+
+        <div class="feature-item">
+            <img src="assets/team_collaboration.png" alt="Team Collaboration Illustration">
+            <div class="feature-content">
+                <h3>Team Collaboration</h3>
+                <p>Work seamlessly with your team in real-time. Share updates, files, and feedback effortlessly to boost
+                    productivity.</p>
+            </div>
+        </div>
+
+
+        <div class="feature-item">
+            <img src="assets/progress_tracking.png" alt="Progress Tracking Illustration">
+            <div class="feature-content">
+                <h3>Progress Tracking</h3>
+                <p>Visualize project progress with charts and graphs. Stay on top of deadlines and milestones with
+                    real-time insights.</p>
+            </div>
+        </div>
+
+
+        <div class="feature-item">
+            <img src="assets/role_access.png" alt="Role-Based Access Illustration">
+            <div class="feature-content">
+                <h3>Role-Based Access</h3>
+                <p>Manage permissions for Admins, Managers, and Team Members. Ensure secure and efficient access control
+                    for your team.</p>
+            </div>
+        </div>
+    </section>
+
+
+    <footer>
+        &copy; 2025 Epsilon. All rights reserved.
+    </footer>
+    <script src="/js/init.js"></script>
+</body>
+
+</html>
