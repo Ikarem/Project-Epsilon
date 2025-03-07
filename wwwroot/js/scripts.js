@@ -926,7 +926,6 @@ function renderRisks(risks = []) {
             risk.riskScore = impactScore * probScore;
         }
 
-        // Rest of your code remains unchanged
         const impactColors = {
             'high': '#ff4444',
             'medium': '#ffbb33',
@@ -2640,10 +2639,6 @@ function generateMasterTimeline(timelineData) {
 
 
 document.addEventListener('DOMContentLoaded', function () {
-    // if (window.location.pathname.endsWith(".html")) {
-    //     window.history.replaceState(null, "", window.location.pathname.replace(".html", ""));
-    // }
-
     const dashboardLink = document.querySelector('a[href="#dashboard"]');
     if (dashboardLink) {
         dashboardLink.addEventListener('click', function (e) {
