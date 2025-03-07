@@ -3,8 +3,8 @@ using System.Collections.Generic;
 
 public class Task : ProjectItemBase
 {
-    public int Id { get; set; }
-    public string Name { get; set; }
+    public new int Id { get; set; }
+    public string Name { get; set; } = string.Empty;
     public string Description { get; set; } = string.Empty;
     public string Priority { get; set; } = "low";
     public DateTime DueDate { get; set; }
@@ -12,7 +12,7 @@ public class Task : ProjectItemBase
     public string AssignedTo { get; set; } = string.Empty;
     public List<Comment> Comments { get; set; } = new();
     public List<int> Dependencies { get; set; } = new();
-    public int ProjectId { get; set; }
+    public new int ProjectId { get; set;}
     public List<string> Tags { get; set; } = new();
     public int? MilestoneId { get; set; }
     public DateTime? CompletedAt { get; set; }
@@ -76,6 +76,6 @@ public class Task : ProjectItemBase
 public class Comment
 {
     public long Id { get; set; }
-    public string Text { get; set; }
+    public string Text { get; set; } = string.Empty;
     public DateTime Date { get; set; }
 }

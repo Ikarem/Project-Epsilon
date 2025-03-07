@@ -120,7 +120,7 @@ public class AnalyticsService : IAnalyticsService
             
             int riskScore = project.Risks.Count > 0 ? 
                 project.Risks.Max(r => r.CalculateRiskScore()) : 0;
-            
+                
             
             int healthScore = 100;
             

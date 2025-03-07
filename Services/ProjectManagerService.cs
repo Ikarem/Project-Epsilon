@@ -160,16 +160,15 @@ public class ProjectManagerService : IProjectService
         {
             throw new Exception($"Project with ID {projectId} not found");
         }
-
+        
         var risk = project.Risks.FirstOrDefault(r => r.Id == riskId);
         if (risk == null)
         {
-            throw new Exception($"Risk with ID {riskId} not found in project {projectId}");
+            throw new Exception($"Risk with ID {riskId} not found");
         }
-
+        
         project.Risks.Remove(risk);
     }
-    
     
     public void AddMilestone(int projectId, string name, string description, DateTime dueDate)
     {
@@ -188,6 +187,8 @@ public class ProjectManagerService : IProjectService
         
         project.AddMilestone(milestone);
     }
+
+    
     
     public List<Milestone> GetMilestonesByProjectId(int projectId)
     {

@@ -904,24 +904,29 @@ function renderRisks(risks = []) {
         riskElement.className = 'risk-item';
         riskElement.dataset.riskId = risk.id;
 
-
-        const impactStr = String(risk.impact || '').trim();
-        const probabilityStr = String(risk.probability || '').trim();
+        const impactStr = risk.impact === 0 ? '1' : String(risk.impact+1 || '').trim();
+        const probabilityStr = risk.probability === 0 ? '1' : String(risk.probability+1 || '').trim();
 
         console.log("Risk data:", {
             id: risk.id,
             impact: impactStr,
-            probability: probabilityStr
+            probability: probabilityStr,
+            riskScore: risk.riskScore
         });
 
+        const riskScore = risk.riskScore;
 
-        const riskScore = risk.calculateRiskScore ||
-            (impactStr.toLowerCase() === 'high' ? 3 :
-                impactStr.toLowerCase() === 'medium' ? 2 : 1) *
-            (probabilityStr.toLowerCase() === 'high' ? 3 :
-                probabilityStr.toLowerCase() === 'medium' ? 2 : 1);
+        if (riskScore === undefined || riskScore === null) {
+            const impactScore = impactStr.toLowerCase() === 'high' ? 3 : 
+                            impactStr.toLowerCase() === 'medium' ? 2 : 1;
+            
+            const probScore = probabilityStr.toLowerCase() === 'high' ? 3 : 
+                           probabilityStr.toLowerCase() === 'medium' ? 2 : 1;
+            
+            risk.riskScore = impactScore * probScore;
+        }
 
-
+        // Rest of your code remains unchanged
         const impactColors = {
             'high': '#ff4444',
             'medium': '#ffbb33',
@@ -945,7 +950,7 @@ function renderRisks(risks = []) {
 
         const impactColor = impactColors[impactStr.toLowerCase()] || '#ff4444';
         const probabilityColor = probabilityColors[probabilityStr.toLowerCase()] || '#ffbb33';
-        const scoreColor = scoreToColor[riskScore] || '#ff4444';
+        const scoreColor = scoreToColor[risk.riskScore] || '#ff4444';
         const mitigation = risk.mitigationStrategy || 'No mitigation strategy provided';
 
         riskElement.innerHTML = `
@@ -954,7 +959,7 @@ function renderRisks(risks = []) {
                 <div class="risk-badges">
                     <span class="risk-badge" style="background-color: ${impactColor}">Impact: ${impactStr}</span>
                     <span class="risk-badge" style="background-color: ${probabilityColor}">Prob: ${probabilityStr}</span>
-                    <div class="risk-score-circle" style="background-color: ${scoreColor}" title="Risk Score: ${riskScore}"></div>
+                    <div class="risk-score-circle" style="background-color: ${scoreColor}" title="Risk Score: ${risk.riskScore}"></div>
                 </div>
             </div>
             <div class="risk-mitigation">
@@ -969,14 +974,6 @@ function renderRisks(risks = []) {
 
         riskList.appendChild(riskElement);
     });
-}
-
-function calculateRiskScore(impact, probability) {
-    const impactScore = String(impact).toLowerCase() === 'high' ? 3 :
-        String(impact).toLowerCase() === 'medium' ? 2 : 1;
-    const probScore = String(probability).toLowerCase() === 'high' ? 3 :
-        String(probability).toLowerCase() === 'medium' ? 2 : 1;
-    return impactScore * probScore;
 }
 
 function formatDate(dateString) {
@@ -2349,7 +2346,7 @@ function searchTasks() {
         const taskName = task.querySelector('h4').textContent.toLowerCase();
         const taskDescription = task.querySelector('.task-description').textContent.toLowerCase();
         const taskAssignee = task.querySelector('.assigned-to').textContent.toLowerCase();
-        const taskPriority = task.className.match(/priority-(\w+)/) ? . [1] ? .toLowerCase() || '';
+        const taskPriority = task.className.match(/priority-(\w+)/)?.[1]?.toLowerCase() || '';
 
         const tagElements = task.querySelectorAll('.task-tag');
         let taskTags = '';
